@@ -55,9 +55,13 @@ public class BookingController {
      * @return The Booking object.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Booking> getBookingById(@PathVariable Long id) {
-        Booking booking = bookingService.getBookingById(id);
-        return new ResponseEntity<>(booking, HttpStatus.OK);
+    public ResponseEntity<?> getBookingById(@PathVariable Long id) {
+        try {
+            Booking booking = bookingService.getBookingById(id);
+            return new ResponseEntity<>(booking, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     /**
