@@ -13,6 +13,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private String phone;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -74,6 +75,14 @@ public class User {
     public void setNotifications(List<Notifications> notifications) {
         this.notifications = notifications;
     }
+    public String getPhone() {
+        return phone; // Getter for phone
+    }
 
-
+    public void setPhone(String phone) {
+        this.phone = phone; // Setter for phone
+    }
 }
+
+
+

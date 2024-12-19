@@ -18,8 +18,6 @@ public class Hotel {
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Room> rooms;
-
-    // Getters and Setters
     public Long getId() {
         return id;
     }

@@ -1,30 +1,45 @@
 package com.travelagency.travelagency_backend.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "event")
+@Table(name = "events")
 public class Event {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String location;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private Double minPrice;
-    private Double maxPrice;
-    private String eventType;
+    @Column(nullable = false)
+    private String name;
 
-    // Getters and setters for all fields
+    private String location;
+
+    @Column(nullable = false)
+    private LocalDate date;
+
+    private double price;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Booking> bookings = new ArrayList<>();
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLocation() {
@@ -35,43 +50,27 @@ public class Event {
         this.location = location;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public LocalDateTime getEndDate() {
-        return endDate;
+    public double getPrice() {
+        return price;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public Double getMinPrice() {
-        return minPrice;
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
-    public void setMinPrice(Double minPrice) {
-        this.minPrice = minPrice;
-    }
-
-    public Double getMaxPrice() {
-        return maxPrice;
-    }
-
-    public void setMaxPrice(Double maxPrice) {
-        this.maxPrice = maxPrice;
-    }
-
-    public String getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

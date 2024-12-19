@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "notifications")
 public class Notifications {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,12 +16,13 @@ public class Notifications {
     private User user;
 
     private String type; // Email or SMS
-    private String content;
+    private String content; // The content of the notification
     private String status; // Queued, Sent, Failed
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -65,4 +67,3 @@ public class Notifications {
         return createdAt;
     }
 }
-
